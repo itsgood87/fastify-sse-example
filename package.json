@@ -1,0 +1,27 @@
+{
+  "name": "fastify-sse-example",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^6.9.0",
+    "@fastify/view": "^7.4.1",
+    "fastify": "^4.14.1",
+    "liquidjs": "^10.6.1",
+    "point-of-view": "^6.3.0"
+  },
+  "devDependencies": {
+    "chart.js": "^4.2.1",
+    "chartjs": "^0.3.24",
+    "parcel": "^2.8.3",
+    "parcel-transformer-liquid": "^1.1.0",
+    "tailwindcss": "^3.2.7"
+  }
+}

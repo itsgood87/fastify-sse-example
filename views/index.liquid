@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script
+      src="dist/index.js"
+      type="module"
+      defer></script>
+    <link href="css/tailwind.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-2 items-center justify-center">
+        <div class="flex items-center justify-center py-2">
+          <h1 class="font-semibold text-2xl">Fastify Server-Side Events Demo</h1>
+        </div>
+        <span class="font-medium text-lg">Clients connected:
+          <span id="client_count">{{ client_count }}</span>
+        </span>
+        <div class="w-full h-[512px] bg-gray-200">
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
