@@ -3,10 +3,12 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:tailwind": "npx tailwindcss -i ./tailwind.css -o ./css/tailwind.css",
+    "build:parcel": "npx parcel build 'views/*html' --public-url dist",
+    "build": "npm run build:tailwind && npm run build:parcel"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +23,6 @@
   },
   "devDependencies": {
     "parcel": "^2.8.3",
-    "parcel-transformer-liquid": "^1.1.0",
     "tailwindcss": "^3.2.7"
   }
 }

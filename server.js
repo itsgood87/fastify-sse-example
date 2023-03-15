@@ -11,12 +11,13 @@ const fastify = Fastify({
   logger: true
 })
 
-
+// Serve static js and css files
 fastify.register(serve, {
   root: path.join(__dirname, 'dist'),
   prefix: '/dist/'
 });
 
+// Init Liquid
 const engine = new Liquid({
   root: path.join(__dirname, "views"),
   extname: ".liquid",
@@ -28,9 +29,9 @@ fastify.register(view, {
   },
 });
 
-// Declare a route
+// Index route
 fastify.get('/', function (request, response) {
-  response.view("./views/index.liquid", {client_count: clients.length});
+  response.view("/dist/index.liquid.html", {client_count: clients.length});
 })
 
 // SSE route 
