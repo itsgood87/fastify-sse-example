@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 
 /**
  * Store an array of the clients
@@ -5,32 +6,36 @@
  */
 export let clients = []
 
-let lastFive = [10.0, 11.5, 9.6, 6.7, 8.8];
+// When server starts up, generate the first 50 points randomly (between -5 and 15)
+let prevPoints = [...new Array(50)].map((e, index) => {return {x: DateTime.now().plus({seconds: -index}).toMillis(), y: Math.random() * 20 - 5}}).reverse();
 
 function generateDataPoint(){
-  // Get the average of the last five data points
-  const avg = lastFive.reduce((a,b) => a + b, 0) / lastFive.length;
+  // Get the average of the previous points
+  const avg = prevPoints.reduce((acc,v) => acc + v.y, 0) / prevPoints.length;
 
-  // Generate a random number between -3 and +3
-  const rand = Math.random() * 6 - 3;
+  // Generate a random number between -6 and +6
+  const rand = Math.random() * 12 - 6;
 
   // Sum them
   const sum = avg + rand;
+  const point = {x: new Date().valueOf(), y: sum};
+
 
   // Remove first data point and push this to end
-  lastFive.shift();
-  lastFive.push(sum);
+  prevPoints.shift();
+  prevPoints.push(point);
 
-  return sum;
+  // Return the point with the timestamp
+  return {x: new Date().valueOf(), y: sum};
 }
 
 setInterval(() => {
   // Generate a new data point
-  const value = generateDataPoint();
+  const point = generateDataPoint();
 
   // Send to all clients
   for(const client of clients){
-    client.reply.raw.write(`type: message\ndata: ${JSON.stringify({event: "data", value: value})}\n\n`)
+    client.reply.raw.write(`event:data\ndata: ${JSON.stringify(point)}\n\n`)
   }
 }, 1000);
 
@@ -40,7 +45,7 @@ setInterval(() => {
 function sendClientCount(){
   // Send an update on client count to all clients
   for(const client of clients){
-    client.reply.raw.write(`type: message\ndata: ${JSON.stringify({event: "clients", value: clients.length})}\n\n`)
+    client.reply.raw.write(`event:clients\ndata: ${clients.length}\n\n`)
   }
 }
 
@@ -58,6 +63,9 @@ function addClient(request, reply){
 
   // Send the client count to all clients
   sendClientCount();
+
+  // Send the intial data to this client
+  reply.raw.write(`event:initial_data\ndata:${JSON.stringify(prevPoints)}\n\n`);
 }
 
 /**

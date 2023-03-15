@@ -11,15 +11,10 @@ const fastify = Fastify({
   logger: true
 })
 
-fastify.register(serve, {
-  root: path.join(__dirname, 'css'),
-  prefix: '/css/'
-});
 
 fastify.register(serve, {
   root: path.join(__dirname, 'dist'),
-  prefix: '/dist/',
-  decorateReply: false
+  prefix: '/dist/'
 });
 
 const engine = new Liquid({
@@ -41,15 +36,10 @@ fastify.get('/', function (request, response) {
 // SSE route 
 fastify.get("/sse", sse);
 
-fastify.get("/cheese", (request, response) => {
-  response.view("./views/test.liquid", { cheese: "gouda" })
-})
-
 // Run the server!
 fastify.listen({ port: 3000 }, function (err, address) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
   }
-  // Server is now listening on ${address}
 })
