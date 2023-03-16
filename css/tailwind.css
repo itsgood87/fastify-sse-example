@@ -560,20 +560,8 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
-}
-
-.right-3 {
-  right: 0.75rem;
-}
-
-.top-3 {
-  top: 0.75rem;
 }
 
 .mx-auto {
@@ -601,10 +589,6 @@ video {
   max-width: 80rem;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -623,6 +607,10 @@ video {
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .py-2 {
@@ -672,12 +660,20 @@ video {
     position: absolute;
   }
 
+  .sm\:right-3 {
+    right: 0.75rem;
+  }
+
+  .sm\:top-3 {
+    top: 0.75rem;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
 
-  .sm\:flex-col {
-    flex-direction: column;
+  .sm\:gap-0 {
+    gap: 0px;
   }
 
   .sm\:px-6 {
