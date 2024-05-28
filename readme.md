@@ -1,6 +1,6 @@
 # Fastify Server-Side Events Example
 
-## [Live demo](https://fastify-sse.timgreen.io)
+## [Live demo](https://fastify-sse.fly.dev/)
 
 This project demonstrates how to set up a [Fastify](https://github.com/fastify/fastify) server that sends server-side events (SSE) to clients. Unlike websockets, this is a one-way connection. Data can only be sent from the server to clients.
 
